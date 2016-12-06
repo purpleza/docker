@@ -7,7 +7,7 @@ ENV HOME=/root \
 	LANGUAGE=en_HK.UTF-8 \
 	LC_ALL=en_HK.UTF-8 \
 	DISPLAY=:0.0 \
-	DISPLAY_SCREEN=1280x1024x8
+	DISPLAY_SCREEN=1280x1024x16
 
 # x11vnc is in testing repo
 RUN echo "http://dl-6.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
