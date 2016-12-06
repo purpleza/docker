@@ -2,6 +2,7 @@ FROM alpine:latest
 
 # Setup environment variables
 ENV HOME=/root \
+    DEBIAN_FRONTEND=noninteractive \
 	LANG=en_HK.UTF-8 \
 	LANGUAGE=en_HK.UTF-8 \
 	LC_ALL=en_HK.UTF-8 \
