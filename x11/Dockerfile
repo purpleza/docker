@@ -17,7 +17,7 @@ RUN apk --update --upgrade add \
     xvfb \
 	x11vnc \
 	socat \
-	dwm \
+	jwm \
 	git \
 	supervisor
 
