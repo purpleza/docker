@@ -7,6 +7,8 @@ ENV HOME=/root \
 	LC_ALL=en_HK.UTF-8 \
 	TZ=Asia/Hong_Kong
 
+WORKDIR $HOME
+
 # setup timezone
 RUN apk --no-cache --update --upgrade add tzdata \
     && cp /usr/share/zoneinfo/$TZ /etc/localtime \
