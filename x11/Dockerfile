@@ -27,8 +27,6 @@ RUN git clone https://github.com/LibVNC/x11vnc.git /root/x11vnc \
         --localstatedir=/var \
     && make && make install
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY x11.conf /etc/supervisor.d/x11.conf
 
 EXPOSE 5900
-
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
