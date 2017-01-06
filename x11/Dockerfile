@@ -2,7 +2,7 @@ FROM purpleza/alpine
 
 # Setup environment variables
 ENV DISPLAY=:0 \
-	DISPLAY_SCREEN=1280x1024x15
+	DISPLAY_SCREEN=1280x1024x16
 
 # Install X11 packages
 RUN apk --no-cache --update --upgrade add \
