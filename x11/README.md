@@ -8,5 +8,6 @@ docker run --name x11 \
   --detach \
   --restart=always \
   --publish 5900:5900 \
+  --publish 6000:6000 \
   purpleza/x11
 ```
