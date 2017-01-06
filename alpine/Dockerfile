@@ -11,7 +11,9 @@ ENV HOME=/root \
 RUN apk --no-cache --update --upgrade add tzdata \
     && cp /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
-    
+
 RUN apk --no-cache --update add supervisor
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+COPY supervisord.conf /etc/supervisord.conf
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
