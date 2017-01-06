@@ -1,40 +1,34 @@
-FROM alpine:latest
+FROM purpleza/alpine
 
 # Setup environment variables
-ENV HOME=/root \
-    DEBIAN_FRONTEND=noninteractive \
-	LANG=en_HK.UTF-8 \
-	LANGUAGE=en_HK.UTF-8 \
-	LC_ALL=en_HK.UTF-8 \
-	TZ=Asia/Hong_Kong \
-	DISPLAY=:0.0 \
+ENV DISPLAY=:0 \
 	DISPLAY_SCREEN=1280x1024x15
 
-# x11vnc is in testing repo
-RUN echo "http://dl-6.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-
-# Install git, supervisor, VNC, & X11 packages
-RUN apk --update --upgrade add \
+# Install X11 packages
+RUN apk --no-cache --update --upgrade add \
     bash \
     xvfb \
-	x11vnc \
 	socat \
-	jwm \
-	git \
-	supervisor
+	jwm
 
-# Clone noVNC from github
-RUN git clone https://github.com/kanaka/noVNC.git /root/noVNC \
-	&& git clone https://github.com/kanaka/websockify /root/noVNC/utils/websockify \
-	&& rm -rf /root/noVNC/.git \
-	&& rm -rf /root/noVNC/utils/websockify/.git \
-	&& apk del git
+# Build x11vnc dependencies
+RUN apk --no-cache --update add \
+    git autoconf automake g++ make \
+    openssl-dev libvncserver-dev
+
+# Build & install x11vnc
+RUN git clone https://github.com/LibVNC/x11vnc.git /root/x11vnc \
+    && cd /root/x11vnc \
+    && ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --mandir=/usr/share/man \
+        --infodir=/usr/share/info \
+        --localstatedir=/var \
+    && make && make install
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Modify the launch script 'ps -p'
-RUN sed -i -- "s/ps -p/ps -o pid | grep/g" /root/noVNC/utils/launch.sh
-
-EXPOSE 8080
+EXPOSE 5900
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

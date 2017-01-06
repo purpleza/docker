@@ -1,3 +1,12 @@
-Automated builds for Docker Hub
+# Docker file of VNC for X11
 
-p.s. A fork of [psharkey/novnc](https://hub.docker.com/r/psharkey/novnc/)
+## Usage
+
+```bash
+docker run --name x11 \
+  --hostname x11 \
+  --detach \
+  --restart=always \
+  --publish 5900:5900 \
+  purpleza/x11
+```
