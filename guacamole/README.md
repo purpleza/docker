@@ -13,5 +13,5 @@ docker run --name guacamole \
   --env MYSQL_DATABASE=$db  \
   --env MYSQL_USER=$dbUser    \
   --env MYSQL_PASSWORD=$dbPassword \
-  glyptodon/guacamole
+  guacamole/guacamole
 ```
