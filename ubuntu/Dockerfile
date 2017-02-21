@@ -10,7 +10,7 @@ ENV HOME=/root \
 WORKDIR $HOME
 
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y supervisor \
+    && apt-get install --no-install-recommends -y supervisor \
     && apt-get clean
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
