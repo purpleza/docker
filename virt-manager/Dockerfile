@@ -9,4 +9,5 @@ RUN apt-get update && \
     virt-manager \
     && apt-get clean
 
-ENTRYPOINT ["setsid", "virt-manager"]
+#ENTRYPOINT ["setsid", "virt-manager"]
+CMD setsid virt-manager --debug || setsid virt-manager --debug
