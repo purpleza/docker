@@ -1,18 +1,29 @@
 FROM ubuntu:latest
 
 # Setup environment variables
-ENV HOME=/root \
-	LANG=en_HK.UTF-8 \
+ENV LANG=en_HK.UTF-8 \
 	LANGUAGE=en_HK.UTF-8 \
 	LC_ALL=en_HK.UTF-8 \
-	TZ=Asia/Hong_Kong
+	TZ=Asia/Hong_Kong \
+	USER=user \
+	HOME=/home/$USER
 
-WORKDIR $HOME
+RUN locale-gen en_HK.UTF-8 && update-locale
 
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install --no-install-recommends -y supervisor \
-    && apt-get clean
+    && apt-get install --no-install-recommends -y \
+        whiptail \
+        psmisc \
+        wget \
+        apt-utils \
+        vim \
+        supervisor \
+    && apt-get autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/cache/* /var/log/apt/* /tmp/*
 
-COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY files /
+
+RUN useradd -m $USER
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
