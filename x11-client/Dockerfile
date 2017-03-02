@@ -1,8 +1,10 @@
 FROM purpleza/ubuntu
 
-ENV GTK_IM_MODULE=fcitx
-ENV QT_IM_MODULE=fcitx
+ENV GTK_IM_MODULE=xim
+ENV QT_IM_MODULE=xim
 ENV XMODIFIERS=@im=fcitx
+
+COPY files /
 
 # install chinese fonts
 RUN apt-get update && apt-get install -y --no-install-recommends \
