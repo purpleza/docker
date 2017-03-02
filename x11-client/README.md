@@ -2,5 +2,5 @@
 
 ## Installed Setting
 
-1. adobe-source-han-sans-tw-fonts - Traditional chinese fonts
-2. adobe-source-han-sans-cn-fonts - Simpified chinese fonts
+1. Chinese fonts
+2. Chinese Input Method (Cangjie5) 
