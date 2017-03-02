@@ -1,11 +1,18 @@
-FROM purpleza/alpine
+FROM purpleza/ubuntu
+
+ENV GTK_IM_MODULE=fcitx
+ENV QT_IM_MODULE=fcitx
+ENV XMODIFIERS=@im=fcitx
 
 # install chinese fonts
-RUN apk --no-cache --update --upgrade add curl \
-    && curl -O http://mirrors.cicku.me/archlinux/community/os/i686/adobe-source-han-sans-tw-fonts-1.004-1-any.pkg.tar.xz \
-    && curl -O http://mirrors.cicku.me/archlinux/community/os/i686/adobe-source-han-sans-cn-fonts-1.004-1-any.pkg.tar.xz \
-    && mkdir fonts && tar xf *.xz -C fonts \
-    && cp -R fonts/usr/share/fonts /usr/share/fonts \
-    && cp -R fonts/etc/fonts /etc/fonts \
-    && rm -rf ~/* \
-    && apk del --purge curl
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fonts-noto-cjk \
+    fcitx-table-cangjie5 \
+    fcitx-frontend-gtk3 \
+    fcitx-ui-classic \
+    fcitx-config-gtk \
+    dbus-x11 \
+    && apt-get clean \
+    && rm -rf /var/cache/* /var/log/apt/* /tmp/*
+
+VOLUME ["/tmp/.X11.unix/"]
