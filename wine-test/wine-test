@@ -1,0 +1,17 @@
+docker run --rm -it ubuntu bash
+
+DISPLAY=192.168.21.16:0.0
+
+# ppa:wine/wine-builds
+# apt-get update -y && \
+# apt-get install -y software-properties-common && \
+# add-apt-repository -y ppa:wine/wine-builds
+
+# Install wine
+RUN echo "deb http://ppa.launchpad.net/wine/wine-builds/ubuntu xenial main" >> /etc/apt/sources.list && \
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 77C899CB && \
+  dpkg --add-architecture i386 &&\
+  apt-get update -y && \
+  apt-get install -y --install-recommends \
+  winehq-devel \
+  winetricks
