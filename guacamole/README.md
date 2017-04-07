@@ -10,8 +10,8 @@ docker run --name guacamole \
   --publish 8083:8080 \
   --link guacd:guacd \
   --link mysql:mysql \
-  --env MYSQL_DATABASE=$db  \
-  --env MYSQL_USER=$dbUser    \
-  --env MYSQL_PASSWORD=$dbPassword \
+  --env MYSQL_DATABASE=$MYSQL_DATABASE  \
+  --env MYSQL_USER=$MYSQL_USER    \
+  --env MYSQL_PASSWORD=$MYSQL_PASSWORD \
   guacamole/guacamole
 ```
